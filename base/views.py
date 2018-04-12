@@ -104,6 +104,7 @@ def env_add(request):
         return HttpResponseRedirect("/base/env/")
     prj_list = Project.objects.all()
     return render(request, "base/env/add.html", {"prj_list": prj_list})
+
 # 测试环境更新
 def env_update(request):
     if request.method == 'POST':
@@ -120,6 +121,12 @@ def env_update(request):
     env =Environment.objects.get(env_id=env_id)
     prj_list = Project.objects.all()
     return render(request, "base/env/update.html", {"env": env, "prj_list": prj_list})
+
+def env_delete(request):
+    if request.method == 'GET':
+        env_id = request.GET['env_id']
+        Environment.objects.filter(env_id=env_id).delete()
+        return HttpResponseRedirect("base/env/")
 
 
 # 接口增删改查

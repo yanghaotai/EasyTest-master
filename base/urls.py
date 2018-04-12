@@ -31,6 +31,7 @@ urlpatterns = [
     url(r'/env/', env_index),
     url(r'/env_add/', env_add),
     url(r'/env_update/', env_update),
+    url(r'/env_delete/', env_delete),
 
     url(r'/interface/', interface_index),
     url(r'/interface_add/', interface_add),
