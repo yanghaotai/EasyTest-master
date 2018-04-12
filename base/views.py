@@ -157,7 +157,30 @@ def interface_add(request):
     prj_list = Project.objects.all()
     return render(request, "base/interface/add.html", {"prj_list": prj_list})
 
-# 接口增删改查
+
+def interface_update(request):
+    if request.method == 'POST':
+        if_id = request.POST['if_id']
+        if_name = request.POST['if_name']
+        prj_id = request.POST['prj_id']
+        project = Project.objects.get(prj_id=prj_id)
+        url = request.POST['url']
+        private_key = request.POST['private_key']
+        description = request.POST['description']
+        Interface.objects.filter(if_id=if_id).update(if_name=if_name, url=url, project=project, private_key=private_key, description=description)
+        return HttpResponseRedirect("/base/interface/")
+    if_id = request.GET['if_id']
+    interface =Interface.objects.get(if_id=if_id)
+    prj_list = Project.objects.all()
+    return render(request, "base/interface/update.html", {"interface": interface, "prj_list": prj_list})
+
+def interface_delete(request):
+    if request.method == 'GET':
+        if_id = request.GET['if_id']
+        Interface.objects.filter(if_id=if_id).delete()
+        return HttpResponseRedirect("base/interface/")
+
+# 用例增删改查
 def case_index(request):
     case_list = Case.objects.all()
     return render(request, "base/case/index.html", {"case_list": case_list})

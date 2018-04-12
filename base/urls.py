@@ -35,6 +35,8 @@ urlpatterns = [
 
     url(r'/interface/', interface_index),
     url(r'/interface_add/', interface_add),
+    url(r'/interface_update/', interface_update),
+    url(r'/interface_delete/', interface_delete),
 
     url(r'/case/', case_index),
     url(r'/case_add/', case_add),
